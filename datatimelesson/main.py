@@ -70,138 +70,63 @@ import pickle
 import os
 
 # Define the name of the file to store the user information
-USER_FILE = "users.pkl"
+USER_FILE = "dict.users"
+
 
 class Login:
-
-def __init__(self, username:str, password:str) ->:None
-    self.username = username
-    self.password = password
-
-def register():
-    """
-    Register a new user by prompting for a username and password.
-    """
-    
-    # Check if the username already exists
-    if os.path.exists(USER_FILE):
-        with open(USER_FILE, "rb") as f:
-            users = pickle.load(f)
-        if username in users:
-            print("Username already exists")
-            return
-
-    # Add the new user to the dictionary of users
-    with open(USER_FILE, "ab") as f:
-        if os.path.getsize(USER_FILE) == 0:
-            users = {}
-        else:
-            with open(USER_FILE, "rb") as f:
-                users = pickle.load(f)
-        users[username] = password
-        pickle.dump(users, f)
-
-    print("User registered successfully")
-
-
-def login():
-    """
-    Prompt for a username and password and check if they are valid.
-    """
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
-
-    # Load the dictionary of users from the file
-    if os.path.exists(USER_FILE):
-        with open(USER_FILE, "rb") as f:
-            users = pickle.load(f)
-
-        # Check if the username and password match a user in the dictionary
-        if username in users and users[username] == password:
-            print(f"Hello, {username}")
-        else:
-            print("Invalid username or password")
-    else:
-        print("No users registered yet")
-
-
-# Main loop
-username = input("Enter a username: ")
-password = input("Enter a password: ")
-
-while True:
-    action = input("Enter 'login' to login or 'register' to register: ")
-    if action == "register":
-  =
-        login()
-    else:
-        print("Invalid action")
-
-
-
-import pickle
-import os
-
-# Define the name of the file to store the user information
-USER_FILE = "users.pkl"
-
-class Login:
-    def __init__(self, username:str, password:str) -> None:
+    def __init__(self, username: str, password: str) -> None:
         self.username = username
         self.password = password
 
-def register(users, username:str, password:str):
-    """
-    Register a new user by prompting for a username and password.
-    """
-    
-    # Check if the username already exists
-    if username in users:
-        print("Username already exists")
-        return
+    def check_register(users, username: str, password: str):
+        if username in USER_FILE:
+            print("Username already exists")
+            return
 
-    # Add the new user to the dictionary of users
-    users[username] = password
+        users[username] = password
 
-    # Save the updated user dictionary to the file
-    with open(USER_FILE, "wb") as f:
-        pickle.dump(users, f)
+        # Save the updated user dictionary to the file
+        with open(USER_FILE, "wb") as f:
+            pickle.dump(users, f)
 
-    print("User registered successfully")
+        print("User registered successfully")
+
+    # def login(users):
+    # """
+    # Prompt for a username and password and check if they are valid.
+    # """
+    # username = input("Enter your username: ")
+    # password = input("Enter your password: ")
+
+    # # Check if the username and password match a user in the dictionary
+    # if username in users and users[username] == password:
+    #     print(f"Hello, {username}")
+    # else:
+    #     print("Invalid username or password")
 
 
-def login(users):
-    """
-    Prompt for a username and password and check if they are valid.
-    """
-    username = input("Enter your username: ")
-    password = input("Enter your password: ")
-
-    # Check if the username and password match a user in the dictionary
-    if username in users and users[username] == password:
-        print(f"Hello, {username}")
-    else:
-        print("Invalid username or password")
-
+log = Login("admin", "admin")
 
 # Main program
-while True:
-    # Prompt the user to enter a username and password
-    username = input("Enter a username: ")
-    password = input("Enter a password: ")
+# while True:
+# Prompt the user to enter a username and password
+username = input("Enter a username: ")
+log.check_register()
 
-    # Load the dictionary of users from the file, if it exists
-    if os.path.exists(USER_FILE):
-        with open(USER_FILE, "rb") as f:
-            users = pickle.load(f)
-    else:
-        users = {}
+# password = input("Enter a password: ")
 
-    action = input("Enter 'login' to login or 'register' to register: ")
+# # Load the dictionary of users from the file, if it exists
+# if os.path.exists(USER_FILE):
+#     with open(USER_FILE, "rb") as f:
+#         users = pickle.load(f)
+# else:
+#     users = {}
 
-    if action == "register":
-        register(users, username, password)
-    elif action == "login":
-        login(users)
-    else:
-        print("Invalid action")
+# action = input("Enter 'login' to login or 'register' to register: ")
+
+# if action == "register":
+#     register(users, username, password)
+# elif action == "login":
+#     login(users)
+# else:
+#     print("Invalid action")
