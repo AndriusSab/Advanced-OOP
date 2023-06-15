@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <title>Leap Year Checker</title>
+</head>
+<body>
+    <h1>Leap Year Checker</h1>
+    <form action="/keliamieji_input" method="POST">
+        <input type="text" name="year" placeholder="Enter a year">
+        <button type="submit">Check</button>
+    </form>
+    {% if year %}
+        {% if is_leap_year %}
+            <p>{{ year }} is a leap year.</p>
+        {% else %}
+            <p>{{ year }} is not a leap year.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
