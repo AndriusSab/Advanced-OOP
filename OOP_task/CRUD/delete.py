@@ -1,6 +1,6 @@
-import parts_database
+from database import parts_database
 from typing import Dict
-import logger
+import logging
 
 
 def delete_component(database, component_type, component_key):

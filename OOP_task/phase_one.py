@@ -7,7 +7,7 @@
 
 
 """PC PART PICKER """
-from  parts_database import parts_database
+from  database import parts_database
 from typing import Dict
 from abc import ABC, abstractmethod
 import logger
